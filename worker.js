@@ -7,7 +7,7 @@ export default {
       "Cross-Origin-Opener-Policy": 'same-site; report-to="default"',
       "Cross-Origin-Resource-Policy": "same-site",
       "Content-Security-Policy":
-        "default-src 'none'; object-src 'none'; form-action 'self'; manifest-src 'self'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests; block-all-mixed-content",
+        "default-src 'none'; object-src 'none'; form-action 'self'; manifest-src 'self'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests; block-all-mixed-content; script-src 'nonce-hPbORtHvBUB532MSTnzG47VMdw+4Ei5i'; style-src 'nonce-hPbORtHvBUB532MSTnzG47VMdw+4Ei5i'",
     };
 
     const response = await fetch(request);
