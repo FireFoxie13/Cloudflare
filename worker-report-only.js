@@ -7,7 +7,7 @@ export default {
       "Cross-Origin-Opener-Policy": 'same-site; report-to="default"',
       "Cross-Origin-Resource-Policy": "same-site",
       "Content-Security-Policy-Report-Only":
-        "default-src 'none'; object-src 'none'; form-action 'self'; manifest-src 'self'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests; block-all-mixed-content; style-src 'nonce-hPbORtHvBUB532MSTnzG47VMdw+4Ei5i'; report-uri /Framework/CspReporting/ReportViolation",
+        "default-src 'none'; object-src 'none'; form-action 'self'; manifest-src 'self'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests; block-all-mixed-content; report-uri /Framework/CspReporting/ReportViolation",
     };
 
     const response = await fetch(request);
