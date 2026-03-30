@@ -22,42 +22,9 @@ export default {
     let response = await fetch(request);
     let newHeaders = new Headers(response.headers);
 
-    // Handle Strict-Transport-Security header.
-    let hstsWasPresent = false;
-    let hstsWasOverwritten = false;
-
-    if (newHeaders.has("Strict-Transport-Security")) {
-      hstsWasPresent = true;
-
-      const existingHsts =
-        newHeaders.get("Strict-Transport-Security") || "";
-      const maxAgeMatch = existingHsts.match(/max-age\s*=\s*(\d+)/i);
-
-      if (maxAgeMatch) {
-        const currentMaxAge = Number(maxAgeMatch[1]);
-
-        if (
-          Number.isSafeInteger(currentMaxAge) &&
-          currentMaxAge >= 0 &&
-          currentMaxAge < DEFAULT_MAX_AGE
-        ) {
-          hstsWasOverwritten = true;
-          newHeaders.set(
-            "Strict-Transport-Security",
-            DEFAULT_SECURITY_HEADERS["Strict-Transport-Security"]
-          );
-        }
-      }
-    }
-
-    // Set other security headers (except CSP if already present).
+    // Set all default security headers (except CSP if already present).
+    // Always force-set HSTS to override zone-level settings.
     Object.entries(DEFAULT_SECURITY_HEADERS).forEach(([name, value]) => {
-      if (
-        name === "Strict-Transport-Security" &&
-        hstsWasPresent &&
-        !hstsWasOverwritten
-      )
-        return;
       if (name === "Content-Security-Policy" && newHeaders.has(name)) return;
       newHeaders.set(name, value);
     });
